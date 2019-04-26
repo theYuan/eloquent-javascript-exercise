@@ -1,0 +1,39 @@
+class Group {
+  constructor() {
+    this.members = [];
+  }
+
+  add(value) {
+    if (!this.has(value)) {
+      this.members.push(value);
+    }
+  }
+
+  delete(value) {
+    if(this.has(value))
+    	this.members = this.members.filter(v => v !== value);
+  }
+
+  has(value) {
+    return this.members.includes(value);
+  }
+
+  static from(collection) {
+    let group = new Group;
+    for (let value of collection) {
+      group.add(value);
+    }
+    return group;
+  }
+}
+
+let group = Group.from([10, 20]);
+console.log(group.members);
+console.log(group.has(10));
+// ¡ú true
+console.log(group.has(30));
+// ¡ú false
+group.add(10);
+group.delete(10);
+console.log(group.has(10));
+// ¡ú false
